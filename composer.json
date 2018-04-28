@@ -1,0 +1,53 @@
+{
+    "name": "phly/event-dispatcher",
+    "description": "Experimental event dispatcher for PSR-14",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "components",
+        "psr-14",
+        "event-dispatcher"
+    ],
+    "support": {
+        "issues": "https://github.com/phly/event-dispatcher/issues",
+        "source": "https://github.com/phly/event-dispatcher",
+        "rss": "https://github.com/phly/event-dispatcher/releases.atom"
+    },
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.1.1",
+        "zendframework/zend-coding-standard": "~1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phly\\EventDispatcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phly\\EventDispatcherTest\\": "test/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        },
+        "zf": {
+            "config-provider": "Phly\\EventDispatcher\\ConfigProvider"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    }
+}

@@ -1,0 +1,3 @@
+# event-dispatcher
+
+This component provides ...
