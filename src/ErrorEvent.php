@@ -11,9 +11,10 @@ namespace Phly\EventDispatcher;
 
 use Psr\Event\Dispatcher\EventErrorInterface;
 use Psr\Event\Dispatcher\EventInterface;
+use Psr\Event\Dispatcher\TaskInterface;
 use Throwable;
 
-class ErrorEvent implements EventErrorInterface, EventInterface
+class ErrorEvent implements EventErrorInterface, EventInterface, TaskInterface
 {
     /** @var EventInterface */
     private $event;
