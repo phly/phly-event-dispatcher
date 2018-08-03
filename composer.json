@@ -28,6 +28,9 @@
         "zendframework/zend-coding-standard": "~1.0.0"
     },
     "autoload": {
+        "files": [
+            "src/functions/lazy_listener.php"
+        ],
         "psr-4": {
             "Phly\\EventDispatcher\\": "src/"
         }
