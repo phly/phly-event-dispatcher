@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Phly\EventDispatcher;
+namespace Phly\EventDispatcher\ListenerProvider;
 
 use Psr\Event\Dispatcher\EventInterface;
 

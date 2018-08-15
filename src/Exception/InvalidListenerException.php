@@ -9,7 +9,7 @@ namespace Phly\EventDispatcher\Exception;
 
 use RuntimeException;
 
-class InvalidListenerException extends RuntimeException
+class InvalidListenerException extends RuntimeException implements ExceptionInterface
 {
     /**
      * @param mixed $service Should be a non-object type.
