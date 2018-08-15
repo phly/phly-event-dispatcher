@@ -1,5 +1,5 @@
 {
-    "name": "phly/event-dispatcher",
+    "name": "phly/phly-event-dispatcher",
     "description": "Experimental event dispatcher for PSR-14",
     "license": "BSD-3-Clause",
     "keywords": [
@@ -8,9 +8,9 @@
         "event-dispatcher"
     ],
     "support": {
-        "issues": "https://github.com/phly/event-dispatcher/issues",
-        "source": "https://github.com/phly/event-dispatcher",
-        "rss": "https://github.com/phly/event-dispatcher/releases.atom"
+        "issues": "https://github.com/phly/phly-event-dispatcher/issues",
+        "source": "https://github.com/phly/phly-event-dispatcher",
+        "rss": "https://github.com/phly/phly-event-dispatcher/releases.atom"
     },
     "repositories": [
         {
