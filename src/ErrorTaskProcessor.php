@@ -25,25 +25,33 @@ class ErrorTaskProcessor implements TaskProcessorInterface
         $this->listenerProvider = $listenerProvider;
     }
 
-    public function notify(MessageInterface $message) : void
-    {
-    }
-
     /**
      * {@inheritDoc}
      *
      * If a Throwable is caught when executing the listener loop, it is cast
-     * to an ErrorEvent, and then the method calls itself with that event,
-     * returning it on completion.
+     * to an ErrorEvent, and then the method calls itself with that instance,
+     * returning the original task on completion.
+     *
+     * In the case that a Throwable is caught for an ErrorEvent, we re-throw
+     * to prevent recursion.
      */
     public function process(TaskInterface $task) : TaskInterface
     {
-        foreach ($this->getListenersForEvent($task) as $listener) {
+        if ($task->isStopped()) {
+            return $task;
+        }
+
+        foreach ($this->listenerProvider->getListenersForEvent($task) as $listener) {
             try {
                 $listener($task);
             } catch (Throwable $e) {
+                if ($task instanceof EventErrorInterface) {
+                    throw $e;
+                }
+
                 $error = new ErrorEvent($task, $listener, $e);
-                return $this->process($error);
+                $this->process($error);
+                return $task;
             }
 
             if ($task instanceof StoppableTaskInterface && $task->isStopped()) {

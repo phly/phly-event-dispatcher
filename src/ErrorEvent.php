@@ -14,7 +14,11 @@ use Psr\Event\Dispatcher\EventInterface;
 use Psr\Event\Dispatcher\TaskInterface;
 use Throwable;
 
-class ErrorEvent implements EventErrorInterface, EventInterface, TaskInterface
+class ErrorEvent extends \Exception implements
+    EventErrorInterface,
+    EventInterface,
+    TaskInterface,
+    Throwable
 {
     /** @var EventInterface */
     private $event;
@@ -22,14 +26,11 @@ class ErrorEvent implements EventErrorInterface, EventInterface, TaskInterface
     /** @var callable */
     private $listener;
 
-    /** @var Throwable */
-    private $throwable;
-
     public function __construct(EventInterface $event, callable $listener, Throwable $throwable)
     {
+        parent::__construct($throwable->getMessage, $throwable->getCode(), $throwable);
         $this->event = $event;
         $this->listener = $listener;
-        $this->throwable = $throwable;
     }
 
     /**
@@ -53,6 +54,6 @@ class ErrorEvent implements EventErrorInterface, EventInterface, TaskInterface
      */
     public function getThrowable(): Throwable
     {
-        return $this->throwable;
+        return $this->getPrevious();
     }
 }

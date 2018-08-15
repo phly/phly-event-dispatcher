@@ -28,17 +28,21 @@ class TaskProcessor implements TaskProcessorInterface
     /**
      * {@inheritDoc}
      *
-     * If a Throwable is caught when executing the listener loop, it is cast
-     * to an ErrorEvent and returned immediately. Otherwise, the original task
-     * is returned when complete.
+     * If a Throwable is caught when executing the listener loop, we re-throw
+     * it as an ErrorEvent. Otherwise, the original task is returned when
+     * complete.
      */
     public function process(TaskInterface $task) : TaskInterface
     {
-        foreach ($this->getListenersForEvent($task) as $listener) {
+        if ($task->isStopped()) {
+            return $task;
+        }
+
+        foreach ($this->listenerProvider->getListenersForEvent($task) as $listener) {
             try {
                 $listener($task);
             } catch (Throwable $e) {
-                return new ErrorEvent($task, $listener, $e);
+                throw new ErrorEvent($task, $listener, $e);
             }
 
             if ($task instanceof StoppableTaskInterface && $task->isStopped()) {

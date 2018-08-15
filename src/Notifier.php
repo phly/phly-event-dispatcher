@@ -30,18 +30,19 @@ class Notifier implements MessageNotifierInterface
      *
      * Loops through each listener capable of listening to the $message and
      * calls each. If the listener raises a Throwable, the throwable is caught,
-     * converted to an ErrorEvent; when all listeners have been notified, the
-     * notifier then calls itself with the ErrorEvent.
+     * converted to an ErrorEvent, and memoized in an array of errors; when all
+     * listeners have been notified, the notifier then calls itself once for
+     * each ErrorEvent memoized.
      *
      * In the case that a Throwable is caught for an ErrorEvent, we re-throw
-     * that Throwable to prevent recursion.
+     * to prevent recursion.
      */
     public function notify(MessageInterface $message): void
     {
         $listeners = $this->listenerProvider->getListenersForEvent($message);
 
         if ($message instanceof EventErrorInterface && empty($listeners)) {
-            throw $message->getThrowable();
+            throw $message;
         }
 
         $errors = [];
