@@ -1,7 +1,7 @@
 <?php
 /**
  * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018 Matthew Weier O'Phinney (https:/mwop.net)
+ * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
  * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
  */
 
@@ -11,16 +11,23 @@ namespace Phly\EventDispatcher\ListenerProvider;
 
 use Closure;
 use InvalidArgumentException;
-use Psr\Event\Dispatcher\EventInterface;
 use ReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod;
+
+use function array_shift;
+use function explode;
+use function in_array;
+use function is_object;
+use function is_string;
+use function sprintf;
+use function strpos;
 
 class ReflectionBasedListenerProvider implements ReflectableListenerProviderInterface
 {
     private $listeners = [];
 
-    public function getListenersForEvent(EventInterface $event) : iterable
+    public function getListenersForEvent(object $event) : iterable
     {
         foreach ($this->listeners as $eventType => $listeners) {
             if (! $event instanceof $eventType) {

@@ -1,7 +1,7 @@
 <?php
 /**
  * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018 Matthew Weier O'Phinney (https:/mwop.net)
+ * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
  * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
  */
 
@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Phly\EventDispatcher;
 
 use Psr\Container\ContainerInterface;
-use Psr\Event\Dispatcher\EventInterface;
 
 final class LazyListener
 {
@@ -32,14 +31,14 @@ final class LazyListener
     public function __construct(ContainerInterface $container, string $service, string $method = null)
     {
         $this->container = $container;
-        $this->service = $service;
-        $this->method = $method;
+        $this->service   = $service;
+        $this->method    = $method;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function __invoke(EventInterface $event) : void
+    public function __invoke(object $event) : void
     {
         $listener = $this->getListener(
             $this->container->get($this->service)
