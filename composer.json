@@ -18,6 +18,7 @@
         "psr/event-dispatcher": "^0.7.0"
     },
     "require-dev": {
+        "fig/event-dispatcher-util": "^0.7.1",
         "phpunit/phpunit": "^7.1.1",
         "zendframework/zend-coding-standard": "~1.0.0"
     },
@@ -34,7 +35,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Phly\\EventDispatcherTest\\": "test/"
+            "PhlyTest\\EventDispatcher\\": "test/"
         }
     },
     "config": {

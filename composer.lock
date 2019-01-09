@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32de931e4e337c99dbae363446761436",
+    "content-hash": "c66273678b017ad998a38e660ed97347",
     "packages": [
         {
             "name": "psr/container",
@@ -156,6 +156,57 @@
                 "instantiate"
             ],
             "time": "2017-07-22T11:58:36+00:00"
+        },
+        {
+            "name": "fig/event-dispatcher-util",
+            "version": "0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/event-dispatcher-util.git",
+                "reference": "8bb440229e615a06a5e85e1cdf8e3c99abaa0a53"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/event-dispatcher-util/zipball/8bb440229e615a06a5e85e1cdf8e3c99abaa0a53",
+                "reference": "8bb440229e615a06a5e85e1cdf8e3c99abaa0a53",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~7.2",
+                "psr/event-dispatcher": "^0.7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Fig\\EventDispatcher\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                },
+                {
+                    "name": "Larry Garfield",
+                    "email": "larry@garfieldtech.com",
+                    "homepage": "https://www.garfieldtech.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Useful utility classes and traits for implementing the PSR events standard",
+            "homepage": "https://github.com/php-fig/event-dispatcher-util",
+            "keywords": [
+                "events",
+                "psr-14"
+            ],
+            "time": "2018-12-26T21:23:56+00:00"
         },
         {
             "name": "myclabs/deep-copy",
