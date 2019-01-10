@@ -7,6 +7,8 @@ pages:
       - "Event Dispatcher": dispatcher.md
       - "Listener Providers": listener-providers.md
       - "Lazy Listeners": lazy-listeners.md
+      - "Queued Listeners": queued-listeners.md
+      - "Services": services.md
 site_name: 'phly-event-dispatcher'
 site_description: 'Component Description goes here'
 repo_url: 'https://github.com/phly/event-dispatcher'

@@ -21,6 +21,16 @@ class ConfigProvider
     public function getDependencies() : array
     {
         return [
+            'invokables' => [
+                ListenerProvider\AttachableListenerProvider::class      => ListenerProvider\AttachableListenerProvider::class,
+                ListenerProvider\PrioritizedListenerProvider::class     => ListenerProvider\PrioritizedListenerProvider::class,
+                ListenerProvider\RandomizedListenerProvider::class      => ListenerProvider\RandomizedListenerProvider::class,
+                ListenerProvider\ReflectionBasedListenerProvider::class => ListenerProvider\ReflectionBasedListenerProvider::class,
+            ],
+            'factories' => [
+                EventDispatcher::class         => EventDispatcherFactory::class,
+                ErrorEmittingDispatcher::class => EventDispatcherFactory::class,
+            ],
         ];
     }
 }
