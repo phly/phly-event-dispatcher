@@ -13,3 +13,7 @@ Run the following to install this library:
 ```bash
 $ composer require phly/phly-event-dispatcher
 ```
+
+## Documentation
+
+Documentation is available in the [docs/book/](docs/book/) tree.

@@ -1,9 +1,13 @@
 docs_dir: docs/book
 site_dir: docs/html
 pages:
-    - index.md
+    - Home: index.md
     - Introduction: intro.md
-site_name: Component Name Goes Here
+    - Reference:
+      - "Event Dispatcher": dispatcher.md
+      - "Listener Providers": listener-providers.md
+      - "Lazy Listeners": lazy-listeners.md
+site_name: 'phly-event-dispatcher'
 site_description: 'Component Description goes here'
 repo_url: 'https://github.com/phly/event-dispatcher'
-copyright: 'Copyright (c) 2018 <a href="https://www.zend.com/">Zend Technologies USA Inc.</a>'
+copyright: 'Copyright (c) <a href="https://mwop.net/">Matthew Weier O\'Phinney</a>'
