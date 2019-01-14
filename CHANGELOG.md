@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 0.3.0 - 2019-01-14
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Removes the ListenerShouldQueue interface. Queueing is always based on the
+  combination of the queue/task runner in use by the application, and the
+  listener provider to which the listener attaches. As such, no interface is
+  needed.
+
+### Fixed
+
+- Nothing.
+
 ## 0.2.1 - 2019-01-10
 
 ### Added

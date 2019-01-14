@@ -1,16 +1,11 @@
 # Getting Support
 
-Zend Framework offers three support channels:
+This project offers the following support channel(s):
 
-- For real-time questions, use our
-  [chat](https://zendframework-slack.herokuapp.com)
-- For detailed questions (e.g., those requiring examples) use our
-  [forums](https://discourse.zendframework.com/c/questions/components)
 - To report issues, use this repository's
   [issue tracker](https://github.com/phly/event-dispatcher/issues/new)
 
-**DO NOT** use the issue tracker to ask questions; use chat or the forums for
-that. Questions posed to the issue tracker will be closed.
+**DO NOT** use the issue tracker to ask questions.
 
 When reporting an issue, please include the following details:
 
