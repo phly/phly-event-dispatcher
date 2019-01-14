@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- Moves `EventDispatcherFactory` to the source root, instead of under its
+  `ListenerProvider` subdirectory, ensuring it can be used.
 
 ### Deprecated
 
@@ -25,7 +26,18 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- Fixes a typo in `LazyListener::getListener()` where the method was using an
+  undeclared variable, instead of an instance property.
+
+- Fixes an `instanceof` check in `ErrorEmittingDispatcher::handleCaughtThrowable()`,
+  preventing an infinite recursion condition. 
+
+- Fixes a typo in the `ErrorEvent` constructor during an assigment.
+
+- Fixes a typo of a function name in `ReflectionBasedListenerProvider::getProvider()`.
+
+- Fixes two errors in `ListenerProviderAggregate::getListenersForEvent()` that
+  prevented it from working at all.
 
 ## 0.2.1 - 2019-01-10
 
