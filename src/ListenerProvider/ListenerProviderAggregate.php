@@ -13,12 +13,15 @@ use Psr\EventDispatcher\ListenerProviderInterface;
 
 class ListenerProviderAggregate implements ListenerProviderInterface
 {
+    /**
+     * @var ListenerProviderInterface[]
+     */
     private $providers = [];
 
     public function getListenersForEvent(object $event) : iterable
     {
-        foreach ($providers as $provider) {
-            yield from $provider;
+        foreach ($this->providers as $provider) {
+            yield from $provider->getListenersForEvent($event);
         }
     }
 
