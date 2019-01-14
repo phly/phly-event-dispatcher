@@ -64,7 +64,7 @@ class ErrorEmittingDispatcher implements EventDispatcherInterface
      */
     private function handleCaughtThrowable(Throwable $e, object $event, callable $listener) : void
     {
-        if ($event instanceof EventError) {
+        if ($event instanceof ErrorEvent) {
             // Re-throw the original exception, per the spec.
             throw $event->getThrowable();
         }

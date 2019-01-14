@@ -14,65 +14,28 @@ use Phly\EventDispatcher\EventDispatcher;
 use Phly\EventDispatcher\ListenerProvider\AttachableListenerProvider;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use Psr\EventDispatcher\StoppableEventInterface;
 
 class EventDispatcherTest extends TestCase
 {
-    public function testImplementsEventDispatcherInterface()
+    use CommonDispatcherTests;
+
+    public function setUp()
     {
-        $listeners = $this->prophesize(ListenerProviderInterface::class)->reveal();
-        $dispatcher = new EventDispatcher($listeners);
-        $this->assertInstanceOf(EventDispatcherInterface::class, $dispatcher);
+        $this->provider = $this->prophesize(ListenerProviderInterface::class);
+        $this->dispatcher = new EventDispatcher($this->provider->reveal());
     }
 
-    public function testTriggersAllListenersWithEvent()
+    public function getDispatcher() : EventDispatcherInterface
     {
-        $event = new TestAsset\TestEvent();
-        $counter = 0;
-
-        $listeners = new AttachableListenerProvider();
-        for ($i = 0; $i < 5; $i += 1) {
-            $listeners->listen(TestAsset\TestEvent::class, function ($e) use ($event, &$counter) {
-                Assert::assertSame($event, $e);
-                $counter += 1;
-            });
-        }
-
-        $dispatcher = new EventDispatcher($listeners);
-
-        $this->assertSame($event, $dispatcher->dispatch($event));
-        $this->assertEquals(5, $counter);
+        return $this->dispatcher;
     }
 
-    public function testShortCircuitsIfAListenerStopsEventPropagation()
+    public function getListenerProvider() : ObjectProphecy
     {
-        $event = new class() extends TestAsset\TestEvent implements StoppableEventInterface {
-            use StoppableEventTrait;
-
-            public function stopPropagation() : void
-            {
-                $this->stopPropagation = true;
-            }
-        };
-
-        $counter = 0;
-
-        $listeners = new AttachableListenerProvider();
-        for ($i = 0; $i < 5; $i += 1) {
-            $listeners->listen(TestAsset\TestEvent::class, function ($e) use ($event, &$counter) {
-                Assert::assertSame($event, $e);
-                $counter += 1;
-                if ($counter === 3) {
-                    $e->stopPropagation();
-                }
-            });
-        }
-
-        $dispatcher = new EventDispatcher($listeners);
-
-        $this->assertSame($event, $dispatcher->dispatch($event));
-        $this->assertEquals(3, $counter);
+        return $this->provider;
     }
 }
