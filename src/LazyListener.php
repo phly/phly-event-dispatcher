@@ -76,7 +76,7 @@ final class LazyListener
 
         // Object, method present, but method is not callable: invalid
         if (! is_callable($callback)) {
-            throw Exception\InvalidListenerException::forNonCallableInstanceMethod($service, $method);
+            throw Exception\InvalidListenerException::forNonCallableInstanceMethod($service, $this->method);
         }
 
         // Object with method as callback
