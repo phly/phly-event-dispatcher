@@ -25,6 +25,7 @@ use function strpos;
 
 class ReflectionBasedListenerProvider implements ReflectableListenerProviderInterface
 {
+    /** @var array<string, callable[]> */
     private $listeners = [];
 
     public function getListenersForEvent(object $event) : iterable
@@ -80,7 +81,7 @@ class ReflectionBasedListenerProvider implements ReflectableListenerProviderInte
             return new ReflectionMethod($listener, '__invoke');
         }
 
-        if (is_string($listener) && false !== stpros($listener, '::')) {
+        if (is_string($listener) && false !== strpos($listener, '::')) {
             $listener = explode('::', $listener, 2);
         }
 

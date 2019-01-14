@@ -37,6 +37,9 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "test/TestAsset/listener_function.php"
+        ],
         "psr-4": {
             "PhlyTest\\EventDispatcher\\": "test/"
         }
