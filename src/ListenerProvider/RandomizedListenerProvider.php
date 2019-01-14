@@ -16,6 +16,7 @@ use function in_array;
 
 class RandomizedListenerProvider implements ListenerProviderInterface
 {
+    /** @var array<string, callable[]> */
     private $listeners = [];
 
     public function getListenersForEvent(object $event) : iterable
@@ -28,11 +29,9 @@ class RandomizedListenerProvider implements ListenerProviderInterface
             }
         }
 
-        while (count($listeners)) {
-            $index = array_rand($listeners);
-            yield $listeners[$index];
-            unset($listeners[$index]);
-        }
+        shuffle($listeners);
+
+        yield from $listeners;
     }
 
     public function listen(string $name, callable $listener) : void
