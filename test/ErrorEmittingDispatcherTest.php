@@ -58,12 +58,12 @@ class ErrorEmittingDispatcherTest extends TestCase
         $this->provider
             ->getListenersForEvent($event)
             ->willReturn([$errorRaisingListener])
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledTimes(1);
 
         $this->provider
             ->getListenersForEvent(Argument::type(ErrorEvent::class))
             ->willReturn([$errorListener])
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledTimes(1);
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('TRIGGERED');

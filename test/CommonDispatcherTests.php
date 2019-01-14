@@ -40,7 +40,7 @@ trait CommonDispatcherTests
         $this->getListenerProvider()
             ->getListenersForEvent($event)
             ->willReturn($listeners)
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledTimes(1);
 
         $dispatcher = $this->getDispatcher();
 
@@ -91,7 +91,7 @@ trait CommonDispatcherTests
         $this->getListenerProvider()
             ->getListenersForEvent($event)
             ->willReturn($listeners)
-            ->shouldBeCalledOnce();
+            ->shouldBeCalledTimes(1);
 
         $dispatcher = $this->getDispatcher();
 
