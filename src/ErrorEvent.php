@@ -21,7 +21,7 @@ final class ErrorEvent extends \Exception
 
     public function __construct(object $event, callable $listener, Throwable $throwable)
     {
-        parent::__construct($throwable->getMessage, $throwable->getCode(), $throwable);
+        parent::__construct($throwable->getMessage(), $throwable->getCode(), $throwable);
         $this->event    = $event;
         $this->listener = $listener;
     }
