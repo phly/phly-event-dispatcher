@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.0.0 - 2019-03-25
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- [#1](https://github.com/phly/phly-event-dispatcher/pull/1) updates the psr/event-dispatcher dependency to `^1.0`.
+
+- [#1](https://github.com/phly/phly-event-dispatcher/pull/1) updates the fig/event-dispatcher-util dependency to `^1.0`.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 0.3.0 - 2019-01-14
 
 ### Added
