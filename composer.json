@@ -15,10 +15,10 @@
     "require": {
         "php": "^7.2",
         "psr/container": "^1.0",
-        "psr/event-dispatcher": "^0.7.0"
+        "psr/event-dispatcher": "^1.0"
     },
     "require-dev": {
-        "fig/event-dispatcher-util": "^0.7.1",
+        "fig/event-dispatcher-util": "^1.0",
         "phpunit/phpunit": "^7.1.1",
         "zendframework/zend-coding-standard": "~1.0.0"
     },
@@ -26,7 +26,7 @@
         "phpspec/prophecy": "<1.7.5"
     },
     "provide": {
-        "psr/event-dispatcher-implementation": "^0.7"
+        "psr/event-dispatcher-implementation": "^1.0"
     },
     "autoload": {
         "files": [
