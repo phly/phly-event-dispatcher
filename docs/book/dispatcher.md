@@ -63,7 +63,7 @@ $provider->listen(ErrorEvent::class, function (ErrorEvent $event) use ($logger) 
     ]);
 });
 
-$dispatcher = new EventDispatcher($provider);
+$dispatcher = new ErrorEmittingDispatcher($provider);
 
 $dispatcher->dispatch(new SomeEvent());
 ```
