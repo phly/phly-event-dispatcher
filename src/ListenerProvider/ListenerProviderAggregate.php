@@ -18,6 +18,11 @@ class ListenerProviderAggregate implements ListenerProviderInterface
      */
     private $providers = [];
 
+    public function __construct(ListenerProviderInterface ...$providers)
+    {
+        $this->providers = $providers;
+    }
+
     public function getListenersForEvent(object $event) : iterable
     {
         foreach ($this->providers as $provider) {
