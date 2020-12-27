@@ -16,7 +16,7 @@ use Psr\Container\ContainerInterface;
 
 class LazyListenerTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->event = new TestAsset\TestEvent();
         $this->container = $this->prophesize(ContainerInterface::class);

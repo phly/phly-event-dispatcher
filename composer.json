@@ -19,7 +19,7 @@
     },
     "require-dev": {
         "fig/event-dispatcher-util": "^1.0",
-        "phpunit/phpunit": "^7.1.1",
+        "phpunit/phpunit": "^8.1.1",
         "zendframework/zend-coding-standard": "~1.0.0"
     },
     "conflict": {
