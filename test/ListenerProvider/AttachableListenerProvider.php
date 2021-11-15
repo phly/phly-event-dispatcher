@@ -18,7 +18,7 @@ class AttachableListenerProviderTest extends TestCase
     /** @var AttachableListenerProvider */
     protected $listeners;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->listeners = new AttachableListenerProvider();
     }

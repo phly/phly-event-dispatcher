@@ -19,7 +19,7 @@ class PrioritizedListenerProviderTest extends TestCase
     /** @var PrioritizedListenerProvider */
     protected $listeners;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->listeners = new PrioritizedListenerProvider();
     }

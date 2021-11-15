@@ -20,7 +20,7 @@ use TypeError;
 
 class EventDispatcherFactoryTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->provider  = $this->prophesize(ListenerProviderInterface::class)->reveal();
         $this->container = $this->prophesize(ContainerInterface::class);
