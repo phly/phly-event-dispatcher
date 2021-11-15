@@ -14,9 +14,12 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use PhlyTest\EventDispatcher\TestAsset\TestEvent;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class ListenerProviderAggregateTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testAggregateYieldsFromAttachedProviders()
     {
         $event = new TestEvent();

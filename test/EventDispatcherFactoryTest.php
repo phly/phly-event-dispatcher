@@ -12,7 +12,9 @@ namespace Phly\EventDispatcher;
 use Phly\EventDispatcher\ErrorEmittingDispatcher;
 use Phly\EventDispatcher\EventDispatcher;
 use Phly\EventDispatcher\EventDispatcherFactory;
+use PhlyTest\EventDispatcher\DeprecatedAssertionsTrait;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use stdClass;
@@ -20,6 +22,9 @@ use TypeError;
 
 class EventDispatcherFactoryTest extends TestCase
 {
+    use DeprecatedAssertionsTrait;
+    use ProphecyTrait;
+
     public function setUp(): void
     {
         $this->provider  = $this->prophesize(ListenerProviderInterface::class)->reveal();

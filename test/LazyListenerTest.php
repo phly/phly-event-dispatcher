@@ -12,10 +12,13 @@ namespace PhlyTest\EventDispatcher;
 use Phly\EventDispatcher\Exception\InvalidListenerException;
 use Phly\EventDispatcher\LazyListener;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 class LazyListenerTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function setUp(): void
     {
         $this->event = new TestAsset\TestEvent();

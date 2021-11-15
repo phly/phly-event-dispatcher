@@ -13,6 +13,7 @@ use Phly\EventDispatcher\ErrorEmittingDispatcher;
 use Phly\EventDispatcher\ErrorEvent;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
@@ -22,6 +23,7 @@ use RuntimeException;
 class ErrorEmittingDispatcherTest extends TestCase
 {
     use CommonDispatcherTests;
+    use ProphecyTrait;
 
     public function setUp(): void
     {

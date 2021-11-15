@@ -16,6 +16,8 @@ use SplObserver;
 
 class PrioritizedListenerProviderTest extends TestCase
 {
+    use DeprecatedAssertionsTrait;
+
     /** @var PrioritizedListenerProvider */
     protected $listeners;
 

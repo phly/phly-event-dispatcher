@@ -14,6 +14,7 @@ use Phly\EventDispatcher\EventDispatcher;
 use Phly\EventDispatcher\ListenerProvider\AttachableListenerProvider;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
@@ -22,6 +23,7 @@ use Psr\EventDispatcher\StoppableEventInterface;
 class EventDispatcherTest extends TestCase
 {
     use CommonDispatcherTests;
+    use ProphecyTrait;
 
     public function setUp(): void
     {

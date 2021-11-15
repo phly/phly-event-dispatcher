@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace PhlyTest\EventDispatcher;
 
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
@@ -16,6 +17,8 @@ use Psr\EventDispatcher\StoppableEventInterface;
 
 trait CommonDispatcherTests
 {
+    use ProphecyTrait;
+
     abstract public function getDispatcher() : EventDispatcherInterface;
     abstract public function getListenerProvider() : ObjectProphecy;
 

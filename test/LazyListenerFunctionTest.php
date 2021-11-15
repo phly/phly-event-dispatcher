@@ -11,12 +11,16 @@ namespace PhlyTest\EventDispatcher;
 
 use Phly\EventDispatcher\LazyListener;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 use function Phly\EventDispatcher\lazyListener;
 
 class LazyListenerFunctionTest extends TestCase
 {
+    use DeprecatedAssertionsTrait;
+    use ProphecyTrait;
+
     public function testFunctionReturnsALazyListenerUsingProvidedArguments()
     {
         $container = $this->prophesize(ContainerInterface::class)->reveal();
