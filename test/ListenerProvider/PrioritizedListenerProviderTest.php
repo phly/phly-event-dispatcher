@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace PhlyTest\EventDispatcher;
 
 use Phly\EventDispatcher\ListenerProvider\PrioritizedListenerProvider;
+use PhlyTest\EventDispatcher\TestAsset\TestEvent;
 use PHPUnit\Framework\TestCase;
 use SplObserver;
 
@@ -54,5 +55,22 @@ class PrioritizedListenerProviderTest extends TestCase
             $listener3,
             $listener2,
         ], $listeners);
+    }
+
+    public function testNoDuplicateListenersAreProvided()
+    {
+        $event = new TestAsset\TestEvent();
+
+        $listener = $this->createListener();
+
+        $this->listeners->listen(TestEvent::class, $listener, 1);
+        $this->listeners->listen(TestEvent::class, $listener, 1);
+
+        $listeners = [];
+        foreach ($this->listeners->getListenersForEvent($event) as $listener) {
+            $listeners[] = $listener;
+        }
+
+        $this->assertCount(1, $listeners);
     }
 }

@@ -39,7 +39,7 @@ class PrioritizedListenerProvider implements PrioritizedListenerProviderInterfac
     {
         $priority = sprintf('%d.0', $priority);
         if (isset($this->listeners[$priority][$eventType])
-            && in_array($listener, $this->listeners[$priority][$$eventType], true)
+            && in_array($listener, $this->listeners[$priority][$eventType], true)
         ) {
             // Duplicate detected
             return;
