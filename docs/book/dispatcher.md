@@ -1,7 +1,7 @@
 # The EventDispatcher
 
 `Phly\EventDispatcher\EventDispatcher` provides a
-`Psr\EventDispatcher\EventDispatcherInterface` implementation. It accepts a 
+`Psr\EventDispatcher\EventDispatcherInterface` implementation. It accepts a
 `Psr\EventDispatcher\ListenerProviderInterface` to its constructor, and, when
 dispatching events, queries the provider for listeners to notify.
 
@@ -39,7 +39,7 @@ error:
 - `getEvent()` will return the original event that was dispatched when the error
   was caught.
 - `getListener()` will return the listener that raised the error.
-- `getThrowable() `will return the throwable that was raised.
+- `getThrowable()` will return the throwable that was raised.
 
 As an example:
 
