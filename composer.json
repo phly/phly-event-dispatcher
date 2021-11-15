@@ -13,7 +13,7 @@
         "rss": "https://github.com/phly/phly-event-dispatcher/releases.atom"
     },
     "require": {
-        "php": "^7.3 || ~8.0.0",
+        "php": "^7.3 || ~8.0.0 || ~8.1.0",
         "psr/container": "^1.0",
         "psr/event-dispatcher": "^1.0"
     },
