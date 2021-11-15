@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.0.1 - TBD
+## 1.0.1 - 2021-11-15
 
 ### Added
 
@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#3](https://github.com/phly/phly-event-dispatcher/pull/3) fixes an undeclared variable in the `PrioritizedListenerProvider` which would cause problems when attaching multiple listeners with the same priority.
 
 ## 1.0.0 - 2019-03-25
 
@@ -76,7 +76,7 @@ All notable changes to this project will be documented in this file, in reverse 
   undeclared variable, instead of an instance property.
 
 - Fixes an `instanceof` check in `ErrorEmittingDispatcher::handleCaughtThrowable()`,
-  preventing an infinite recursion condition. 
+  preventing an infinite recursion condition.
 
 - Fixes a typo in the `ErrorEvent` constructor during an assigment.
 
