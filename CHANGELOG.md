@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- This version adds support for PHP 8.0.
+- This version adds support for PHP 8.0 and 8.1.
 
 - [#4](https://github.com/phly/phly-event-dispatcher/pull/4) adds the ability to supply a list of providers to the constructor of the ``ListenerProviderAggregate`.
 
