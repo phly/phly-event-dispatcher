@@ -66,7 +66,7 @@ class ReflectionBasedListenerProvider implements ReflectableListenerProviderInte
             ));
         }
 
-        return $parameter->getType()->__toString();
+        return $parameter->getType()->getName();
     }
 
     private function getReflector(callable $listener) : ReflectionFunctionAbstract
