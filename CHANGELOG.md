@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.2.0 - 2022-01-31
+
+### Removed
+
+- This release removes support for PHP 7.3.
+
 ## 1.1.0 - 2021-11-15
 
 ### Added
