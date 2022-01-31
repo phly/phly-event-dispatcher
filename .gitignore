@@ -1,8 +1,8 @@
+/.phpcs-cache
+/.phpunit.result.cache
 /clover.xml
 /coveralls-upload.json
 /docs/html/
+/phpcs.xml
 /phpunit.xml
 /vendor/
-/zf-mkdoc-theme.tgz
-/zf-mkdoc-theme/
-/.phpunit.result.cache
