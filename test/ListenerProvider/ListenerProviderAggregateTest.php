@@ -1,33 +1,27 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
 namespace PhlyTest\EventDispatcher\ListenerProvider;
 
 use Phly\EventDispatcher\ListenerProvider\ListenerProviderAggregate;
-use PHPUnit\Framework\TestCase;
-use Prophecy\Prophecy\ObjectProphecy;
-use Psr\EventDispatcher\ListenerProviderInterface;
 use PhlyTest\EventDispatcher\TestAsset\TestEvent;
-use Prophecy\PhpUnit\ProphecyTrait;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Psr\EventDispatcher\ListenerProviderInterface;
+
+use function iterator_to_array;
 
 class ListenerProviderAggregateTest extends TestCase
 {
-    use ProphecyTrait;
-
     public function testAggregateYieldsFromAttachedProviders()
     {
-        $event = new TestEvent();
+        $event    = new TestEvent();
         $listener = $this->createListener($event);
         $provider = $this->createProvider($event, $listener);
 
         $aggregate = new ListenerProviderAggregate();
-        $aggregate->attach($provider->reveal());
+        $aggregate->attach($provider);
 
         $listeners = iterator_to_array($aggregate->getListenersForEvent($event));
 
@@ -36,30 +30,31 @@ class ListenerProviderAggregateTest extends TestCase
 
     public function testCanBeConstructedWithProviders()
     {
-        $event = new TestEvent();
+        $event    = new TestEvent();
         $listener = $this->createListener($event);
         $provider = $this->createProvider($event, $listener);
 
-        $aggregate = new ListenerProviderAggregate($provider->reveal());
+        $aggregate = new ListenerProviderAggregate($provider);
 
         $listeners = iterator_to_array($aggregate->getListenersForEvent($event));
 
         $this->assertSame([$listener], $listeners);
     }
 
-    private function createProvider(TestEvent $event, $listener): ObjectProphecy
+    /** @return ListenerProviderInterface&MockObject */
+    private function createProvider(TestEvent $event, callable $listener)
     {
-        $provider = $this->prophesize(ListenerProviderInterface::class);
+        $provider = $this->createMock(ListenerProviderInterface::class);
         $provider
-            ->getListenersForEvent($event)
+            ->method('getListenersForEvent')
+            ->with($event)
             ->willReturn([$listener]);
         return $provider;
     }
 
-    private function createListener(TestEvent $event)
+    private function createListener(TestEvent $event): callable
     {
-        $listener = function (TestEvent $event) {
+        return function (TestEvent $event) {
         };
-        return $listener;
     }
 }

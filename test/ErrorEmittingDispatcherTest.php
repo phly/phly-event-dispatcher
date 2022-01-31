@@ -1,9 +1,4 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
@@ -11,32 +6,36 @@ namespace PhlyTest\EventDispatcher;
 
 use Phly\EventDispatcher\ErrorEmittingDispatcher;
 use Phly\EventDispatcher\ErrorEvent;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
-use Psr\EventDispatcher\StoppableEventInterface;
 use RuntimeException;
+
+use function get_class;
 
 class ErrorEmittingDispatcherTest extends TestCase
 {
     use CommonDispatcherTests;
-    use ProphecyTrait;
+
+    private ErrorEmittingDispatcher $dispatcher;
+
+    /** @var ListenerProviderInterface&MockObject */
+    private $provider;
 
     public function setUp(): void
     {
-        $this->provider = $this->prophesize(ListenerProviderInterface::class);
-        $this->dispatcher = new ErrorEmittingDispatcher($this->provider->reveal());
+        $this->provider   = $this->createMock(ListenerProviderInterface::class);
+        $this->dispatcher = new ErrorEmittingDispatcher($this->provider);
     }
 
-    public function getDispatcher() : EventDispatcherInterface
+    public function getDispatcher(): EventDispatcherInterface
     {
         return $this->dispatcher;
     }
 
-    public function getListenerProvider() : ObjectProphecy
+    /** @return ListenerProviderInterface&MockObject */
+    public function getListenerProvider()
     {
         return $this->provider;
     }
@@ -58,14 +57,16 @@ class ErrorEmittingDispatcherTest extends TestCase
         };
 
         $this->provider
-            ->getListenersForEvent($event)
-            ->willReturn([$errorRaisingListener])
-            ->shouldBeCalledTimes(1);
-
-        $this->provider
-            ->getListenersForEvent(Argument::type(ErrorEvent::class))
-            ->willReturn([$errorListener])
-            ->shouldBeCalledTimes(1);
+            ->expects($this->exactly(2))
+            ->method('getListenersForEvent')
+            ->withConsecutive(
+                [$this->isInstanceOf(get_class($event))],
+                [$this->isInstanceOf(ErrorEvent::class)],
+            )
+            ->willReturnOnConsecutiveCalls(
+                [$errorRaisingListener],
+                [$errorListener],
+            );
 
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('TRIGGERED');

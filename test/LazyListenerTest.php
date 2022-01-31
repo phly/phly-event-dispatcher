@@ -1,9 +1,4 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
@@ -11,24 +6,27 @@ namespace PhlyTest\EventDispatcher;
 
 use Phly\EventDispatcher\Exception\InvalidListenerException;
 use Phly\EventDispatcher\LazyListener;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 class LazyListenerTest extends TestCase
 {
-    use ProphecyTrait;
+    /** @var ContainerInterface&MockObject */
+    private $container;
+
+    private TestAsset\TestEvent $event;
 
     public function setUp(): void
     {
-        $this->event = new TestAsset\TestEvent();
-        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->event     = new TestAsset\TestEvent();
+        $this->container = $this->createMock(ContainerInterface::class);
     }
 
     public function testRaisesExceptionIfServiceReturnedIsNeitherAnObjectNorCallable()
     {
-        $this->container->get('LazyService')->willReturn('not-callable');
-        $lazyListener = new LazyListener($this->container->reveal(), 'LazyService');
+        $this->container->method('get')->with('LazyService')->willReturn('not-callable');
+        $lazyListener = new LazyListener($this->container, 'LazyService');
 
         $this->expectException(InvalidListenerException::class);
         $lazyListener($this->event);
@@ -36,16 +34,16 @@ class LazyListenerTest extends TestCase
 
     public function testInvokesNonObjectCallableListenerReturnedByContainer()
     {
-        $this->container->get('LazyService')->willReturn(__NAMESPACE__ . '\TestAsset\listenerFunction');
-        $lazyListener = new LazyListener($this->container->reveal(), 'LazyService');
+        $this->container->method('get')->with('LazyService')->willReturn(__NAMESPACE__ . '\TestAsset\listenerFunction');
+        $lazyListener = new LazyListener($this->container, 'LazyService');
 
         $this->assertNull($lazyListener($this->event));
     }
 
     public function testRaisesExceptionIfObjectServiceReturnedIsNotCallableAndNoMethodProvided()
     {
-        $this->container->get('LazyService')->willReturn((object) []);
-        $lazyListener = new LazyListener($this->container->reveal(), 'LazyService');
+        $this->container->method('get')->with('LazyService')->willReturn((object) []);
+        $lazyListener = new LazyListener($this->container, 'LazyService');
 
         $this->expectException(InvalidListenerException::class);
         $lazyListener($this->event);
@@ -53,16 +51,16 @@ class LazyListenerTest extends TestCase
 
     public function testInvokesCallableListenerReturnedByContainerWhenNoMethodProvided()
     {
-        $this->container->get('LazyService')->willReturn(new TestAsset\Listener());
-        $lazyListener = new LazyListener($this->container->reveal(), 'LazyService');
+        $this->container->method('get')->with('LazyService')->willReturn(new TestAsset\Listener());
+        $lazyListener = new LazyListener($this->container, 'LazyService');
 
         $this->assertNull($lazyListener($this->event));
     }
 
     public function testRaisesExceptionIfObjectServiceReturnedIsNotCallableViaMethodProvided()
     {
-        $this->container->get('LazyService')->willReturn(new TestAsset\Listener());
-        $lazyListener = new LazyListener($this->container->reveal(), 'LazyService', 'not-a-real-method');
+        $this->container->method('get')->with('LazyService')->willReturn(new TestAsset\Listener());
+        $lazyListener = new LazyListener($this->container, 'LazyService', 'not-a-real-method');
 
         $this->expectException(InvalidListenerException::class);
         $lazyListener($this->event);
@@ -70,8 +68,8 @@ class LazyListenerTest extends TestCase
 
     public function testInvokesMethodOnObjectListenerReturnedByContainer()
     {
-        $this->container->get('LazyService')->willReturn(new TestAsset\Listener());
-        $lazyListener = new LazyListener($this->container->reveal(), 'LazyService', 'onTest');
+        $this->container->method('get')->with('LazyService')->willReturn(new TestAsset\Listener());
+        $lazyListener = new LazyListener($this->container, 'LazyService', 'onTest');
 
         $this->assertNull($lazyListener($this->event));
     }

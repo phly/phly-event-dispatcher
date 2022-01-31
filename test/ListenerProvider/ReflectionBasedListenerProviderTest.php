@@ -1,9 +1,4 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
@@ -11,11 +6,11 @@ namespace PhlyTest\EventDispatcher\ListenerProvider;
 
 use InvalidArgumentException;
 use Phly\EventDispatcher\ListenerProvider\ReflectionBasedListenerProvider;
-use PhlyTest\EventDispatcher\TestAsset\TestEvent;
 use PhlyTest\EventDispatcher\TestAsset\Listener;
+use PhlyTest\EventDispatcher\TestAsset\TestEvent;
 use PHPUnit\Framework\TestCase;
 
-use function PhlyTest\EventDispatcher\TestAsset\listenerFunction;
+use function iterator_to_array;
 
 class ReflectionBasedListenerProviderTest extends TestCase
 {

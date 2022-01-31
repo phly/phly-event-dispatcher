@@ -1,9 +1,4 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
@@ -14,13 +9,15 @@ use PhlyTest\EventDispatcher\TestAsset\TestEvent;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+use function iterator_to_array;
+
 class AttachableListenerProviderTest extends TestCase
 {
     public function testProviderAllowsListenerRegistrationAndReturnsListenersBasedOnEventType()
     {
         $listenerForTestEvent = function (TestEvent $e) {
         };
-        $listenerForStdclass = function (stdClass $e) {
+        $listenerForStdclass  = function (stdClass $e) {
         };
 
         $provider = new AttachableListenerProvider();

@@ -1,7 +1,6 @@
 # event-dispatcher
 
-[![Build Status](https://secure.travis-ci.org/phly/phly-event-dispatcher.svg?branch=master)](https://secure.travis-ci.org/phly/phly-event-dispatcher)
-[![Coverage Status](https://coveralls.io/repos/github/phly/phly-event-dispatcher/badge.svg?branch=master)](https://coveralls.io/github/phly/phly-event-dispatcher?branch=master)
+[![Build Status](https://github.com/phly/phly-event-dispatcher/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/phly/phly-event-dispatcher/actions/workflows/continuous-integration.yml)
 
 This library provides an implementation of [PSR-14 (Event Dispatcher)](https://www.php-fig.org/psr/psr-14/).
 

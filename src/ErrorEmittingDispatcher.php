@@ -1,9 +1,4 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
@@ -62,7 +57,7 @@ class ErrorEmittingDispatcher implements EventDispatcherInterface
      *     the event that $event is an ErrorEvent, the value of its
      *     getThrowable() method.
      */
-    private function handleCaughtThrowable(Throwable $e, object $event, callable $listener) : void
+    private function handleCaughtThrowable(Throwable $e, object $event, callable $listener): void
     {
         if ($event instanceof ErrorEvent) {
             // Re-throw the original exception, per the spec.

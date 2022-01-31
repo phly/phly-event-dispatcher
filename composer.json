@@ -13,15 +13,14 @@
         "rss": "https://github.com/phly/phly-event-dispatcher/releases.atom"
     },
     "require": {
-        "php": "^7.3 || ~8.0.0 || ~8.1.0",
+        "php": "^7.4 || ~8.0.0 || ~8.1.0",
         "psr/container": "^1.0",
         "psr/event-dispatcher": "^1.0"
     },
     "require-dev": {
         "fig/event-dispatcher-util": "^1.0",
-        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5.5",
-        "zendframework/zend-coding-standard": "~1.0.0"
+        "laminas/laminas-coding-standard": "~2.3.0"
     },
     "conflict": {
         "phpspec/prophecy": "<1.7.5"
@@ -46,7 +45,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "extra": {
         "branch-alias": {

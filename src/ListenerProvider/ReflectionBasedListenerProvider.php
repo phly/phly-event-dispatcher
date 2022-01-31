@@ -1,9 +1,4 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
@@ -28,7 +23,7 @@ class ReflectionBasedListenerProvider implements ReflectableListenerProviderInte
     /** @var array<string, callable[]> */
     private $listeners = [];
 
-    public function getListenersForEvent(object $event) : iterable
+    public function getListenersForEvent(object $event): iterable
     {
         foreach ($this->listeners as $eventType => $listeners) {
             if (! $event instanceof $eventType) {
@@ -40,11 +35,12 @@ class ReflectionBasedListenerProvider implements ReflectableListenerProviderInte
         }
     }
 
-    public function listen(callable $listener, string $eventType = null) : void
+    public function listen(callable $listener, ?string $eventType = null): void
     {
         $eventType = $eventType ?: $this->getEventTypeFromReflection($this->getReflector($listener));
 
-        if (isset($this->listeners[$eventType])
+        if (
+            isset($this->listeners[$eventType])
             && in_array($listener, $this->listeners[$eventType], true)
         ) {
             // Duplicate detected
@@ -54,9 +50,9 @@ class ReflectionBasedListenerProvider implements ReflectableListenerProviderInte
     }
 
     /**
-     * @throws InvalidArgumentException if the listener does not define an event argument.
+     * @throws InvalidArgumentException If the listener does not define an event argument.
      */
-    private function getEventTypeFromReflection(ReflectionFunctionAbstract $r) : string
+    private function getEventTypeFromReflection(ReflectionFunctionAbstract $r): string
     {
         $parameter = $r->getParameters()[0];
         if (! $parameter->hasType()) {
@@ -69,9 +65,10 @@ class ReflectionBasedListenerProvider implements ReflectableListenerProviderInte
         return $parameter->getType()->getName();
     }
 
-    private function getReflector(callable $listener) : ReflectionFunctionAbstract
+    private function getReflector(callable $listener): ReflectionFunctionAbstract
     {
-        if ((is_string($listener) && false === strpos($listener, '::'))
+        if (
+            (is_string($listener) && false === strpos($listener, '::'))
             || $listener instanceof Closure
         ) {
             return new ReflectionFunction($listener);
@@ -86,7 +83,7 @@ class ReflectionBasedListenerProvider implements ReflectableListenerProviderInte
         }
 
         $instanceOrClass = array_shift($listener);
-        $method = array_shift($listener);
+        $method          = array_shift($listener);
 
         return new ReflectionMethod($instanceOrClass, $method);
     }

@@ -1,16 +1,11 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
 namespace Phly\EventDispatcherTest;
 
-use PHPUnit\Framework\TestCase;
 use Phly\EventDispatcher\ConfigProvider;
+use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
 {
@@ -19,7 +14,7 @@ class ConfigProviderTest extends TestCase
         $this->provider = new ConfigProvider();
     }
 
-    public function testInvocationReturnsArray()
+    public function testInvocationReturnsArray(): array
     {
         $config = ($this->provider)();
         $this->assertIsArray($config);

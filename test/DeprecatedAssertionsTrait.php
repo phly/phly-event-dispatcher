@@ -1,14 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PhlyTest\EventDispatcher;
 
 use PHPUnit\Framework\Assert;
 use ReflectionProperty;
 
+use function get_class;
+use function sprintf;
+use function var_export;
+
 trait DeprecatedAssertionsTrait
 {
     /**
-     * @param mixed $value
+     * @param mixed $expected
      */
     public function assertAttributeSame($expected, string $property, object $instance, string $message = ''): void
     {
