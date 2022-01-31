@@ -19,7 +19,6 @@
     },
     "require-dev": {
         "fig/event-dispatcher-util": "^1.0",
-        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5.5",
         "laminas/laminas-coding-standard": "~2.3.0"
     },
