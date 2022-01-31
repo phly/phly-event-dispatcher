@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PhlyTest\EventDispatcher;
 
 use Phly\EventDispatcher\LazyListener;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 use function Phly\EventDispatcher\lazyListener;
@@ -14,11 +14,11 @@ use function Phly\EventDispatcher\lazyListener;
 class LazyListenerFunctionTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
-    use ProphecyTrait;
 
     public function testFunctionReturnsALazyListenerUsingProvidedArguments()
     {
-        $container = $this->prophesize(ContainerInterface::class)->reveal();
+        /** @var ContainerInterface&MockObject $container */
+        $container = $this->createMock(ContainerInterface::class);
         $listener  = lazyListener($container, TestAsset\Listener::class, 'onTest');
 
         $this->assertInstanceOf(LazyListener::class, $listener);

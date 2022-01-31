@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace PhlyTest\EventDispatcher;
 
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\EventDispatcher\ListenerProviderInterface;
 use Psr\EventDispatcher\StoppableEventInterface;
 
 // phpcs:ignore WebimpressCodingStandard.NamingConventions.Trait.Suffix
 trait CommonDispatcherTests
 {
-    use ProphecyTrait;
-
     abstract public function getDispatcher(): EventDispatcherInterface;
 
-    abstract public function getListenerProvider(): ObjectProphecy;
+    /** @return ListenerProviderInterface&MockObject */
+    abstract public function getListenerProvider();
 
     public function testImplementsEventDispatcherInterface()
     {
@@ -37,9 +36,10 @@ trait CommonDispatcherTests
         $event = new TestAsset\TestEvent();
 
         $this->getListenerProvider()
-            ->getListenersForEvent($event)
-            ->willReturn($listeners)
-            ->shouldBeCalledTimes(1);
+            ->expects($this->once())
+            ->method('getListenersForEvent')
+            ->with($event)
+            ->willReturn($listeners);
 
         $dispatcher = $this->getDispatcher();
 
@@ -49,17 +49,18 @@ trait CommonDispatcherTests
 
     public function testReturnsEventVerbatimWithoutPullingListenersIfPropagationIsStopped()
     {
-        $event = $this->prophesize(StoppableEventInterface::class);
+        $event = $this->createMock(StoppableEventInterface::class);
         $event
-            ->isPropagationStopped()
+            ->method('isPropagationStopped')
             ->willReturn(true);
 
         $dispatcher = $this->getDispatcher();
-        $this->assertSame($event->reveal(), $dispatcher->dispatch($event->reveal()));
+        $this->assertSame($event, $dispatcher->dispatch($event));
 
         $this->getListenerProvider()
-            ->getListenersForEvent($event->reveal())
-            ->shouldNotHaveBeenCalled();
+            ->expects($this->never())
+            ->method('getListenersForEvent')
+            ->with($event);
     }
 
     public function testReturnsEarlyIfAnyListenersStopsPropagation()
@@ -88,9 +89,10 @@ trait CommonDispatcherTests
         }
 
         $this->getListenerProvider()
-            ->getListenersForEvent($event)
-            ->willReturn($listeners)
-            ->shouldBeCalledTimes(1);
+            ->expects($this->once())
+            ->method('getListenersForEvent')
+            ->with($event)
+            ->willReturn($listeners);
 
         $dispatcher = $this->getDispatcher();
 

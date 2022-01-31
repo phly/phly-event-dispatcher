@@ -6,17 +6,14 @@ namespace PhlyTest\EventDispatcher\ListenerProvider;
 
 use Phly\EventDispatcher\ListenerProvider\ListenerProviderAggregate;
 use PhlyTest\EventDispatcher\TestAsset\TestEvent;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\EventDispatcher\ListenerProviderInterface;
 
 use function iterator_to_array;
 
 class ListenerProviderAggregateTest extends TestCase
 {
-    use ProphecyTrait;
-
     public function testAggregateYieldsFromAttachedProviders()
     {
         $event    = new TestEvent();
@@ -24,7 +21,7 @@ class ListenerProviderAggregateTest extends TestCase
         $provider = $this->createProvider($event, $listener);
 
         $aggregate = new ListenerProviderAggregate();
-        $aggregate->attach($provider->reveal());
+        $aggregate->attach($provider);
 
         $listeners = iterator_to_array($aggregate->getListenersForEvent($event));
 
@@ -37,18 +34,20 @@ class ListenerProviderAggregateTest extends TestCase
         $listener = $this->createListener($event);
         $provider = $this->createProvider($event, $listener);
 
-        $aggregate = new ListenerProviderAggregate($provider->reveal());
+        $aggregate = new ListenerProviderAggregate($provider);
 
         $listeners = iterator_to_array($aggregate->getListenersForEvent($event));
 
         $this->assertSame([$listener], $listeners);
     }
 
-    private function createProvider(TestEvent $event, callable $listener): ObjectProphecy
+    /** @return ListenerProviderInterface&MockObject */
+    private function createProvider(TestEvent $event, callable $listener)
     {
-        $provider = $this->prophesize(ListenerProviderInterface::class);
+        $provider = $this->createMock(ListenerProviderInterface::class);
         $provider
-            ->getListenersForEvent($event)
+            ->method('getListenersForEvent')
+            ->with($event)
             ->willReturn([$listener]);
         return $provider;
     }

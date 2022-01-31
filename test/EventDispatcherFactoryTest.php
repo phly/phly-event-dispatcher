@@ -8,8 +8,8 @@ use Phly\EventDispatcher\ErrorEmittingDispatcher;
 use Phly\EventDispatcher\EventDispatcher;
 use Phly\EventDispatcher\EventDispatcherFactory;
 use PhlyTest\EventDispatcher\DeprecatedAssertionsTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use stdClass;
@@ -18,20 +18,31 @@ use TypeError;
 class EventDispatcherFactoryTest extends TestCase
 {
     use DeprecatedAssertionsTrait;
-    use ProphecyTrait;
+
+    /** @var ContainerInterface&MockObject */
+    private $container;
+
+    private EventDispatcherFactory $factory;
+
+    /** @var ListenerProviderInterface&MockObject */
+    private $provider;
 
     public function setUp(): void
     {
-        $this->provider  = $this->prophesize(ListenerProviderInterface::class)->reveal();
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $this->container->get(ListenerProviderInterface::class)->willReturn($this->provider);
+        $this->provider  = $this->createMock(ListenerProviderInterface::class);
+        $this->container = $this->createMock(ContainerInterface::class);
         $this->factory = new EventDispatcherFactory();
+
+        $this->container
+            ->method('get')
+            ->with(ListenerProviderInterface::class)
+            ->willReturn($this->provider);
     }
 
     public function testFactoryRaisesTypeErrorIfReturnedServiceIsNotAnEventDispatcher()
     {
         $this->expectException(TypeError::class);
-        ($this->factory)($this->container->reveal(), stdClass::class);
+        ($this->factory)($this->container, stdClass::class);
     }
 
     public function knownDispatcherTypes(): iterable
@@ -45,7 +56,7 @@ class EventDispatcherFactoryTest extends TestCase
      */
     public function testFactoryCanCreateEventDispatcher(string $type)
     {
-        $dispatcher = ($this->factory)($this->container->reveal(), $type);
+        $dispatcher = ($this->factory)($this->container, $type);
         $this->assertInstanceOf($type, $dispatcher);
         $this->assertAttributeSame($this->provider, 'listenerProvider', $dispatcher);
     }
