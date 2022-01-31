@@ -1,9 +1,4 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
@@ -24,7 +19,7 @@ class LazyListenerFunctionTest extends TestCase
     public function testFunctionReturnsALazyListenerUsingProvidedArguments()
     {
         $container = $this->prophesize(ContainerInterface::class)->reveal();
-        $listener = lazyListener($container, TestAsset\Listener::class, 'onTest');
+        $listener  = lazyListener($container, TestAsset\Listener::class, 'onTest');
 
         $this->assertInstanceOf(LazyListener::class, $listener);
         $this->assertAttributeSame($container, 'container', $listener);

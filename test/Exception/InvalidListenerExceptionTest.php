@@ -1,9 +1,6 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
+
+declare(strict_types=1);
 
 namespace PhlyTest\EventDispatcher\Exception;
 
@@ -30,7 +27,7 @@ class InvalidListenerExceptionTest extends TestCase
         $instance = InvalidListenerException::forNonCallableInstance($this);
         $this->assertInstanceOf(InvalidListenerException::class, $instance);
         $this->assertStringContainsString(
-            'type "' . __CLASS__ . '" is invalid; must be a callable',
+            'type "' . self::class . '" is invalid; must be a callable',
             $instance->getMessage()
         );
     }

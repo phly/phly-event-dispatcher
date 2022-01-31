@@ -1,9 +1,4 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
@@ -11,24 +6,21 @@ namespace Phly\EventDispatcher;
 
 use Psr\Container\ContainerInterface;
 
+use function is_callable;
+use function is_object;
+
 final class LazyListener
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
-    /**
-     * @var ?string
-     */
-    private $method = null;
+    /** @var ?string */
+    private $method;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $service;
 
-    public function __construct(ContainerInterface $container, string $service, string $method = null)
+    public function __construct(ContainerInterface $container, string $service, ?string $method = null)
     {
         $this->container = $container;
         $this->service   = $service;
@@ -38,7 +30,7 @@ final class LazyListener
     /**
      * {@inheritDoc}
      */
-    public function __invoke(object $event) : void
+    public function __invoke(object $event): void
     {
         $listener = $this->getListener(
             $this->container->get($this->service)
@@ -48,9 +40,9 @@ final class LazyListener
     }
 
     /**
-     * @var mixed $service Service retrieved from container.
+     * @param mixed $service Service retrieved from container.
      */
-    private function getListener($service) : callable
+    private function getListener($service): callable
     {
         // Not an object, and not callable: invalid
         if (! is_object($service) && ! is_callable($service)) {

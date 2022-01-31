@@ -1,20 +1,17 @@
 <?php
-/**
- * @see       https://github.com/phly/phly-event-dispatcher for the canonical source repository
- * @copyright Copyright (c) 2018-2019 Matthew Weier O'Phinney (https:/mwop.net)
- * @license   https://github.com/phly/phly-event-dispatcher/blob/master/LICENSE.md New BSD License
- */
 
 declare(strict_types=1);
 
 namespace PhlyTest\EventDispatcher\ListenerProvider;
 
 use Phly\EventDispatcher\ListenerProvider\ListenerProviderAggregate;
+use PhlyTest\EventDispatcher\TestAsset\TestEvent;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\EventDispatcher\ListenerProviderInterface;
-use PhlyTest\EventDispatcher\TestAsset\TestEvent;
-use Prophecy\PhpUnit\ProphecyTrait;
+
+use function iterator_to_array;
 
 class ListenerProviderAggregateTest extends TestCase
 {
@@ -22,7 +19,7 @@ class ListenerProviderAggregateTest extends TestCase
 
     public function testAggregateYieldsFromAttachedProviders()
     {
-        $event = new TestEvent();
+        $event    = new TestEvent();
         $listener = $this->createListener($event);
         $provider = $this->createProvider($event, $listener);
 
@@ -36,7 +33,7 @@ class ListenerProviderAggregateTest extends TestCase
 
     public function testCanBeConstructedWithProviders()
     {
-        $event = new TestEvent();
+        $event    = new TestEvent();
         $listener = $this->createListener($event);
         $provider = $this->createProvider($event, $listener);
 
@@ -47,7 +44,7 @@ class ListenerProviderAggregateTest extends TestCase
         $this->assertSame([$listener], $listeners);
     }
 
-    private function createProvider(TestEvent $event, $listener): ObjectProphecy
+    private function createProvider(TestEvent $event, callable $listener): ObjectProphecy
     {
         $provider = $this->prophesize(ListenerProviderInterface::class);
         $provider
@@ -56,10 +53,9 @@ class ListenerProviderAggregateTest extends TestCase
         return $provider;
     }
 
-    private function createListener(TestEvent $event)
+    private function createListener(TestEvent $event): callable
     {
-        $listener = function (TestEvent $event) {
+        return function (TestEvent $event) {
         };
-        return $listener;
     }
 }
