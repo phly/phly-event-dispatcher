@@ -19,7 +19,6 @@ class EventDispatcherTest extends TestCase
     /** @var ListenerProviderInterface&MockObject */
     private ListenerProviderInterface $provider;
 
-
     public function setUp(): void
     {
         $this->provider   = $this->createMock(ListenerProviderInterface::class);

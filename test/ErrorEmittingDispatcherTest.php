@@ -6,14 +6,13 @@ namespace PhlyTest\EventDispatcher;
 
 use Phly\EventDispatcher\ErrorEmittingDispatcher;
 use Phly\EventDispatcher\ErrorEvent;
-use PhlyTest\EventDispatcher\TestAsset\Listener;
-use phpDocumentor\Reflection\PseudoTypes\List_;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use RuntimeException;
+
+use function get_class;
 
 class ErrorEmittingDispatcherTest extends TestCase
 {

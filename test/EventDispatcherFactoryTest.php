@@ -31,7 +31,7 @@ class EventDispatcherFactoryTest extends TestCase
     {
         $this->provider  = $this->createMock(ListenerProviderInterface::class);
         $this->container = $this->createMock(ContainerInterface::class);
-        $this->factory = new EventDispatcherFactory();
+        $this->factory   = new EventDispatcherFactory();
 
         $this->container
             ->method('get')
