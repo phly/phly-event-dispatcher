@@ -11,4 +11,4 @@ on:
 
 jobs:
   ci:
-    uses: laminas/.github/workflows/continuous-integration.yml@feature/ci-workflow-template
+    uses: laminas/.github/.github/workflows/continuous-integration.yml@feature/ci-workflow-template
