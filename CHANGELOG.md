@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.3.1 - TBD
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- The features for the 1.3.0 release evidently were merged to the wrong release branch. This release contains the updates intended for 1.3.0.
+
+
 ## 1.3.0 - 2023-01-10
 
 ### Added
