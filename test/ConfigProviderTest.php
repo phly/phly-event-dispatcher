@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
 {
+    private ConfigProvider $provider;
+
     public function setUp(): void
     {
         $this->provider = new ConfigProvider();
