@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.3.0 - 2023-01-10
+
+### Added
+
+- Adds support for psr/container 2.0.
+
+- Adds support for PHP 8.2.
+
+### Changed
+
+- Renames the extra.zf key in the composer.json to extra.laminas.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Removes support for PHP 7.4.
+
+### Fixed
+
+- Nothing.
+
 ## 1.2.0 - 2022-01-31
 
 ### Removed
