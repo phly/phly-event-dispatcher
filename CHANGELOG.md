@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 1.3.0 - 2023-xx-xx
+
+### Added
+
+- This version adds support for PHP 8.2.
+
 ## 1.2.0 - 2022-01-31
 
 ### Removed
