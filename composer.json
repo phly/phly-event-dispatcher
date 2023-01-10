@@ -13,8 +13,8 @@
         "rss": "https://github.com/phly/phly-event-dispatcher/releases.atom"
     },
     "require": {
-        "php": "^7.4 || ~8.0.0 || ~8.1.0",
-        "psr/container": "^1.0",
+        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+        "psr/container": "^1.0 || ^2.0",
         "psr/event-dispatcher": "^1.0"
     },
     "require-dev": {
@@ -45,17 +45,16 @@
         }
     },
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
-        }
+        },
+        "platform": {
+            "php": "8.0.99"
+        },
+        "sort-packages": true
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev",
-            "dev-develop": "1.1.x-dev"
-        },
-        "zf": {
+        "laminas": {
             "config-provider": "Phly\\EventDispatcher\\ConfigProvider"
         }
     },
