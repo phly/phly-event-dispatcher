@@ -2,11 +2,11 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.3.2 - TBD
+## 1.4.0 - TBD
 
 ### Added
 
-- Nothing.
+- Adds support for PHP 8.3.
 
 ### Changed
 
@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- Removes support for PHP 8.0.
 
 ### Fixed
 
