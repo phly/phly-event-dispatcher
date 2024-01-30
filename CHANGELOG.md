@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.4.0 - TBD
+## 1.4.0 - 2024-01-30
 
 ### Added
 
@@ -45,7 +45,6 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Fixed
 
 - The features for the 1.3.0 release evidently were merged to the wrong release branch. This release contains the updates intended for 1.3.0.
-
 
 ## 1.3.0 - 2023-01-10
 
