@@ -56,13 +56,20 @@ class ErrorEmittingDispatcherTest extends TestCase
             $errorSpy->caught += 1;
         };
 
+        $invokedCount = $this->exactly(2);
         $this->provider
-            ->expects($this->exactly(2))
+            ->expects($invokedCount)
             ->method('getListenersForEvent')
-            ->withConsecutive(
-                [$this->isInstanceOf(get_class($event))],
-                [$this->isInstanceOf(ErrorEvent::class)],
-            )
+            ->with($this->callback(function ($received) use ($invokedCount, $event) {
+                if ($invokedCount->numberOfInvocations() === 1) {
+                    $expected = get_class($event);
+                    return $received instanceof $expected;
+                }
+                if ($invokedCount->numberOfInvocations() === 2) {
+                    $expected = get_class($event);
+                    return $received instanceof ErrorEvent;
+                }
+            }))
             ->willReturnOnConsecutiveCalls(
                 [$errorRaisingListener],
                 [$errorListener],

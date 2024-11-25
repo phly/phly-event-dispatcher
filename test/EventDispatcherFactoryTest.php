@@ -45,7 +45,7 @@ class EventDispatcherFactoryTest extends TestCase
         ($this->factory)($this->container, stdClass::class);
     }
 
-    public function knownDispatcherTypes(): iterable
+    public static function knownDispatcherTypes(): iterable
     {
         yield EventDispatcher::class => [EventDispatcher::class];
         yield ErrorEmittingDispatcher::class => [ErrorEmittingDispatcher::class];
